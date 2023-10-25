@@ -19,15 +19,30 @@ fn main() {
             // to monitor the process, you can use Spy++ to get the window name
             let h_wnd = FindWindowA(None, s!("Message"));
             let h_wnd_agent = FindWindowA(None, s!("Microsoft.Flow.RPA.Agent.exe - System Error"));
-            let h_wnd_pad = FindWindowA(None, s!("PAD.AutomationServer.exe - System Error"));
+            let h_wnd_pad_automationserver =
+                FindWindowA(None, s!("PAD.AutomationServer.exe - System Error"));
+            let h_wnd_pad_robot = FindWindowA(None, s!("PAD.Robot.exe - Application Error"));
             if h_wnd.0 != 0 {
                 SendMessageA(h_wnd, WM_CLOSE, WPARAM::default(), LPARAM::default());
             }
             if h_wnd_agent.0 != 0 {
                 SendMessageA(h_wnd_agent, WM_CLOSE, WPARAM::default(), LPARAM::default());
             }
-            if h_wnd_pad.0 != 0 {
-                SendMessageA(h_wnd_pad, WM_CLOSE, WPARAM::default(), LPARAM::default());
+            if h_wnd_pad_automationserver.0 != 0 {
+                SendMessageA(
+                    h_wnd_pad_automationserver,
+                    WM_CLOSE,
+                    WPARAM::default(),
+                    LPARAM::default(),
+                );
+            }
+            if h_wnd_pad_robot.0 != 0 {
+                SendMessageA(
+                    h_wnd_pad_robot,
+                    WM_CLOSE,
+                    WPARAM::default(),
+                    LPARAM::default(),
+                );
             }
 
             thread::sleep(Duration::from_millis(500));
